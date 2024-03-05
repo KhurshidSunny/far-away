@@ -123,6 +123,10 @@ input[type="checkbox"] {
   padding: 0.8rem;
   transform: translateY(2px);
 }
+.list li .desc {
+  display: flex;
+  gap: 8px;
+}
 
 .stats {
   background-color: #76c7ad;
