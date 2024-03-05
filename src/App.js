@@ -28,13 +28,13 @@ export default function App() {
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
 
 function Logo() {
-  return <h1>FAR AWAY</h1>;
+  return <h1>🗼 FAR AWAY 👜</h1>;
 }
 
 function Form({ onAddItem }) {
@@ -120,10 +120,23 @@ function Item({ item, onDeleteItem, onToggleItem }) {
   );
 }
 
-function Stats() {
+function Stats({ items }) {
+  if (!items.length)
+    return (
+      <p className="stats">
+        <em>Start adding some items to your packing list 🚀</em>
+      </p>
+    );
+  const totalItem = items.length;
+  const packedItems = items.filter((item) => item.packed === true).length;
+
+  const numPacked = Math.round((packedItems / totalItem) * 100);
   return (
     <footer className="stats">
-      You have X items on your list, and you already packed X (X%)
+      {numPacked < 100
+        ? `You have ${totalItem} items on your list, and you already packed
+      ${packedItems} (${numPacked}%)`
+        : `You got everything! Ready to go 🛫`}
     </footer>
   );
 }
